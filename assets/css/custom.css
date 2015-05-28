@@ -1,0 +1,208 @@
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+/* Small devices (tablets, 768px and up) */
+/* Medium devices (desktops, 992px and up) */
+/* Large devices (large desktops, 1200px and up) */
+
+#content{
+    display:none;
+    margin-top: 75px;
+
+}
+
+.container{
+    -webkit-box-shadow: 0px 0px 50px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 50px 1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 50px 1px rgba(0,0,0,0.75);
+}
+html {
+    height: 100%;
+}
+
+body,html{
+    background-color: #795b43;
+    margin: 0px;
+    padding:0px;
+    font-family: "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif;
+}
+
+.bold{
+    font-weight: 600;
+}
+
+.noPad{
+    padding: 0px;
+}
+
+#sobreNosotros{
+    padding-top: 35px;
+    padding-bottom: 35px;
+    background: #f1c40f;
+    position: relative;
+    overflow: hidden;
+}
+
+
+#sobreNosotros .panel-heading{
+
+    font-weight: 300;
+    font-size: 25px;
+
+}
+#sobreNosotros .panel-body{
+    padding-top: 35px;
+    padding-bottom: 35px;
+    margin: auto;
+    text-align: justify;
+    font-size: 15px;
+
+}
+
+#Tripulacion,#productos{
+    background: #fff;
+    font-size: 16px ;
+    position: relative;
+    overflow: hidden;
+}
+
+#contacto{
+    background: #95a5a6;
+    color: white;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+#contacto iframe{
+    border: none;
+    width: 100%;
+    min-height: 600px;
+    margin-bottom: -5px;
+}
+
+#contacto .btn-default{
+    background: #f1c40f;
+    color: white;
+}
+
+#contacto h1.pabeFont{
+    color: white;
+    font-size: 30px;
+}
+
+#contacto strong{
+    border-right: 1px solid white;
+    padding-right: 5px;
+    margin-right: 10px;
+}
+
+#contacto-general{
+    border-bottom: 1px solid white;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+
+#forma-contacto{
+    padding: 25px;
+}
+
+
+.pabeFont{
+    color: #795b43
+}
+
+h1.pabeFont {
+    font-size: 45px;
+    font-weight: 300;
+}
+
+.navbar{
+    margin-bottom: 0px;
+}
+
+.superPad{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+
+.centered-bg{
+    position: absolute;
+}
+
+#productos-imgs{
+    height: 500px;
+}
+#productos-imgs div{
+    height: 100%;
+    background: grey;
+    position: relative;
+}
+
+@media (min-width: 768px)  {
+    #Tripulacion,#Tripulacion > [class*="col-"],#contacto,#contacto > [class*="col-"]{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        flex:1 0 auto;
+    }
+
+    .navbar-centered .navbar-nav {
+        float: none;
+        text-align: center;
+    }
+
+    .navbar-centered .navbar-nav > li {
+        float: none;
+    }
+
+    .navbar-centered .nav > li {
+        display: inline;
+    }
+
+    .navbar-centered .nav > li > a {
+        display: inline-block;
+
+        font-size: 18px;
+    }
+
+
+}
+
+@media (min-width: 768px) and (max-width: 992px ){
+    #sobreNosotros-2,#sobreNosotros-2 > [class*="col-sm-6"]{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        flex: 1 0 auto;
+    }
+}
+
+@media(min-width: 992px ){
+    #sobreNosotros-2{
+        display: flex;
+    }
+    #sobreNosotros,#sobreNosotros > [class*="col-"],#sobreNosotros-2 > [class*="col-"]{
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        flex:1 0 auto;
+    }
+}
+
+
+@media (max-width: 768px){
+
+    .navbar-centered .nav > li > a {
+        text-align:center;
+    }
+
+
+    .col-xs-12 .centered-bg{
+        position: relative!important;
+    }
+}
+.nav li{
+    font-family: 'Lato Thin', sans-serif;
+    font-size: 15px;
+}

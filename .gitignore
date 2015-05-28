@@ -1,9 +1,13 @@
-assets/*
-!assets/.gitignore
 protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
-themes/classic/views/
+*/config/development
+*/logs/log-*.php
+!*/logs/index.html
+*/cache/*
+!*/cache/index.html
+!*/cache/.htaccess
+.idea/
 
 # =========================
 # Operating System Files
