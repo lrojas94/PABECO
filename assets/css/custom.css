@@ -4,6 +4,14 @@
 /* Medium devices (desktops, 992px and up) */
 /* Large devices (large desktops, 1200px and up) */
 
+#copy{
+    background-color: #2c3e50;
+    padding: 20px;
+    color: white;
+}
+#copy p{
+    margin: 0px;
+}
 #content{
     display:none;
     margin-top: 75px;

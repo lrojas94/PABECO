@@ -221,6 +221,14 @@
                     </div>
                 </div>
             </div>
+
+            <div class="container-fluid" id="copy">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p class="text-center">&copy Luis Rojas</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
     <!-- Bootstrap core JavaScript
