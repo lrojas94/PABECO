@@ -33,6 +33,22 @@ function paceDone(){
         navBarHeight: 75
     });
 
+    $('#sendMail').click(function(){
+        var data = {};
+        data['name'] = $('input[name="name"').val();
+        data['mail'] = $('input[name="email"').val();
+        data['msg'] = $('textarea[name="msg"').val();
+        //console.log(data);
+        $.ajax({
+            type: "POST",
+            url : baseURL + "/main/mail",
+            data: data,
+            success : function(data) {
+                console.log(data)
+            }
+
+        })
+    });
 
     /*
     TODO:

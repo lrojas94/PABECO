@@ -21,6 +21,10 @@
         <link href="<?php echo base_url("assets/slick/slick-theme.css");?>" rel="stylesheet">
         <link href="<?php echo base_url("assets/css/goFull.css");?>" rel="stylesheet">
         <link href="<?php echo base_url("assets/css/custom.css");?>" rel="stylesheet">
+        <script>
+            var baseURL = "<?php echo base_url();?>index.php" ;
+            //alert(baseURL)
+        </script>
     </head>
     <body>
         <div id="content">
@@ -208,9 +212,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Mensaje</label>
-                                        <textarea class="form-control" rows="10" name="message"></textarea>
+                                        <textarea class="form-control" rows="10" name="msg"></textarea>
                                     </div>
-                                    <button class="btn btn-default btn-block">ENVIAR</button>
+                                    <button class="btn btn-default btn-block" id="sendMail">ENVIAR</button>
                                     <br/>
                                 </div>
                             </div>

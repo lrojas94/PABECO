@@ -7,4 +7,8 @@ class Main extends CI_Controller {
     {
         $this->load->view("main_views/main.php");
     }
+
+    public function mail(){
+        print_r($this->input->post());
+    }
 }
