@@ -8,7 +8,7 @@ class Main extends CI_Controller {
         $this->load->view("main_views/main.php");
     }
 
-    public function mail(){
+    public function mail() {
         $this->load->library('email');
 
         $config = Array(
@@ -31,7 +31,7 @@ class Main extends CI_Controller {
 
         $this->email->from($from,$name);
         $this->email->to('lrojas94@gmail.com');
-        $this->email->subject("Mensaje desde ");
+        $this->email->subject("Feedback sobre PABE.");
         $message = <<<BODY
         <div style="border: 1px solid #795B43;border-top: 20px solid #795B43;padding: 20px;font-size: 16px;
         font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;">
@@ -55,15 +55,17 @@ BODY;
 
         $this->email->message($message);
         $result = array();
-        
+
         if($this->email->send()){
             $result['status'] = 'success';
-            return json_encode($result);
+            $result['file'] =  $_FILES['uploadedFile']['name'];
+            echo json_encode($result);
         }
         else {
 
             $result['status'] = 'error';
             $result['error_msg'] = $this->mail->print_debugger();
+
             return json_encode($result);
         }
 

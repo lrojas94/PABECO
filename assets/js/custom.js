@@ -33,19 +33,20 @@ function paceDone(){
         navBarHeight: 75
     });
 
-    $('#sendMail').click(function(){
-        var data = {};
-        data['name'] = $('input[name="name"').val();
-        data['mail'] = $('input[name="email"').val();
-        data['msg'] = $('textarea[name="msg"').val();
-        //console.log(data);
+    $('#sendMail').click(function(e){
+        e.preventDefault();
+        var data = new FormData($('form')[0]);
         $.ajax({
             type: "POST",
             url : baseURL + "/main/mail",
             data: data,
+            dataType: 'json',
             success : function(data) {
                 console.log(data)
-            }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
 
         })
     });

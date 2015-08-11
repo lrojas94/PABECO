@@ -201,20 +201,29 @@
                             </div>
                             <div id='contacto-mensaje'>
                                 <h1 class="pabeFont text-center">Envienos un Mensaje</h1>
-                                <div class='col-xs-12 noPad'>
-                                    <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input class="form-control" placeholder="Nombre" name="name"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Correo</label>
-                                        <input type="email" class="form-control" placeholder="Correo Electronico" name="email"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Mensaje</label>
-                                        <textarea class="form-control" rows="10" name="msg"></textarea>
-                                    </div>
-                                    <button class="btn btn-default btn-block" id="sendMail">ENVIAR</button>
+                                <form>
+                                    <div class='col-xs-12 noPad'>
+                                        <div class="form-group">
+                                            <label>Nombre</label>
+                                            <input class="form-control" placeholder="Nombre" name="name"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Correo</label>
+                                            <input type="email" class="form-control" placeholder="Correo Electronico" name="email"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mensaje</label>
+                                            <textarea class="form-control" rows="10" name="msg"></textarea>
+                                        </div>
+                                        <div class='col-xs-5 noPad'>
+                                            <button class="btn btn-default btn-block">ANEXAR IMAGEN
+                                                <input type="file" name="uploadedFile"/></button>
+                                        </div>
+                                        <div class='col-xs-6 col-xs-offset-1 noPad'>
+                                            <button class="btn btn-default btn-block" id="sendMail">ENVIAR</button>
+                                        </div>
+                                </form>
+                                    <br/>
                                     <br/>
                                 </div>
                             </div>
