@@ -1,0 +1,19 @@
+{% extends 'main/section.html.twig' %}
+{% block classes %}
+TextImageSection
+{% endblock %}
+
+{% block section_content %}
+<div class="col-xs-12 col-sm-6 superPad">
+    <div>
+        <h1 class="text-center pabeFont">{{ section.data.title }}</h1>
+        <br/>
+        <p class="text-justify">
+            {{ section.data.text }}
+        </p>
+    </div>
+</div>
+<div class='col-xs-12 col-sm-6 noPad'>
+    <img src="{{ base_url(section.data.img_url) }}" class="centered-bg"/>
+</div>
+{% endblock %}

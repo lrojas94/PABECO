@@ -10,7 +10,7 @@
     color: white;
 }
 #copy p{
-    margin: 0px;    
+    margin: 0px;
 }
 #content{
     display:none;
@@ -42,7 +42,7 @@ body,html{
     padding: 0px;
 }
 
-#sobreNosotros{
+.BlockSection{
     padding-top: 35px;
     padding-bottom: 35px;
     background: #f1c40f;
@@ -51,22 +51,26 @@ body,html{
 }
 
 
-#sobreNosotros .panel-heading{
+.BlockSection .panel-heading{
 
     font-weight: 300;
     font-size: 25px;
 
 }
-#sobreNosotros .panel-body{
+.BlockSection .panel-body{
     padding-top: 35px;
     padding-bottom: 35px;
     margin: auto;
     text-align: justify;
     font-size: 15px;
-
 }
 
-#Tripulacion,#productos{
+.BlockSection-2{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.TextImageSection,#productos{
     background: #fff;
     font-size: 16px ;
     position: relative;
@@ -148,7 +152,7 @@ h1.pabeFont {
 }
 
 @media (min-width: 768px)  {
-    #Tripulacion,#Tripulacion > [class*="col-"],#contacto,#contacto > [class*="col-"]{
+    .TextImageSection,.TextImageSection > [class*="col-"],#contacto,#contacto > [class*="col-"]{
         display: -webkit-box;
         display: -webkit-flex;
         display: flex;
@@ -178,7 +182,7 @@ h1.pabeFont {
 }
 
 @media (min-width: 768px) and (max-width: 992px ){
-    #sobreNosotros-2,#sobreNosotros-2 > [class*="col-sm-6"]{
+    .BlockSection-2,.BlockSection-2 > [class*="col-sm-6"]{
         display: -webkit-box;
         display: -webkit-flex;
         display: flex;
@@ -187,10 +191,10 @@ h1.pabeFont {
 }
 
 @media(min-width: 992px ){
-    #sobreNosotros-2{
+    .BlockSection-2{
         display: flex;
     }
-    #sobreNosotros,#sobreNosotros > [class*="col-"],#sobreNosotros-2 > [class*="col-"]{
+    .BlockSection,.BlockSection > [class*="col-"],.BlockSection-2 > [class*="col-"]{
         display: -webkit-box;
         display: -webkit-flex;
         display: flex;

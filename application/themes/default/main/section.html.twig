@@ -1,0 +1,9 @@
+{% set section_id = section_title ~ "_id"  %}
+<div class="row {% block classes %}{% endblock %}" style='background : {{ substr(section.background,0,1) == '#' ? section.background : 'white' }}'
+ id="{{section_id}}" >
+  {% if substr(section.background,0,1) != '#' %}
+    <img class="centered-bg" id='{{section.section_title}}-bg' src="{{ base_url(section.background) }}"/>
+  {% endif %}
+  {% block section_content %}
+  {% endblock %}
+</div>

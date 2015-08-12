@@ -8,6 +8,13 @@ class Main extends CI_Controller {
         $this->load->view("main_views/main.php");
     }
 
+    public function test(){
+        $this->load->model('main/Section_model');
+        $data = $this->Section_model->get_all_sections();
+        $this->twiggy->set('sections',$data);
+        $this->twiggy->template('main/index')->display();
+    }
+
     public function mail() {
         $this->load->library('email');
 

@@ -60,8 +60,8 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 
-$autoload['libraries'] = array();
-
+$autoload['libraries'] = array('database');
+$autoload['sparks'] = array('twiggy/0.8.5');
 
 /*
 | -------------------------------------------------------------------

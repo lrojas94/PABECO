@@ -1,0 +1,15 @@
+
+{# Macro for styling Blocks in BlocksSection #}
+{% macro blockStyle(block_id,color) %}
+  <style>
+    #{{ block_id }} .panel {
+      border-color: {{ color }};
+    }
+    #{{ block_id }} .panel-default>.panel-heading {
+      background-color: {{ color }};
+      border-color: {{ color }};
+    }
+  </style>
+{% endmacro %}
+
+{# Macro for styling ImageSection information. #}
