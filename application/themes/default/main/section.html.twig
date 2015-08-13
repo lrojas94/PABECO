@@ -1,4 +1,4 @@
-{% set section_id = section_title ~ "_id"  %}
+{% set section_id = str_replace(' ','_',section.section_title) ~ "_id"  %}
 <div class="row {% block classes %}{% endblock %}" style='background : {{ substr(section.background,0,1) == '#' ? section.background : 'white' }}'
  id="{{section_id}}" >
   {% if substr(section.background,0,1) != '#' %}

@@ -14,10 +14,13 @@ $(function(){
 
 function paceDone(){
     //Site loaded using PACE
+    $('nav a').click(function(){
+      $(".navbar-collapse").collapse('hide');
+    })
     $('#content').show();
     $('#content').ready(function(){
     });
-    $('#productos-imgs').slick({
+    $('.ImageSection').slick({
         autoplay: true,
         speed: 400,
         autoplaySpeed: 1500,
@@ -26,6 +29,7 @@ function paceDone(){
         dots: false,
         lazyLoad: 'ondemand'
     });
+
     $('.goFull').goFull({
         logoBgPadding: 15,
         captionTopOffset : 15,
@@ -38,11 +42,16 @@ function paceDone(){
         var data = new FormData($('form')[0]);
         $.ajax({
             type: "POST",
-            url : baseURL + "/main/mail",
+            url : baseURL + "/Main/mail",
             data: data,
             dataType: 'json',
             success : function(data) {
-                console.log(data)
+                if(data.status == 'success'){
+                  alert("Su mensaje ha sido enviado con Exito.");
+                }
+                else{
+                  alert("Hubo un error al enviar su mensaje...");
+                }
             },
             cache: false,
             contentType: false,

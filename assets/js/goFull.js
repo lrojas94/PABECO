@@ -60,7 +60,9 @@
         }
 
         $(btn).click(function(){
-            $('html,body').animate({scrollTop : Math.round(Math.min($(item).height(),$('body').height()-$(item).height()))})
+            $('html,body').animate({
+              scrollTop : Math.round(Math.min($(item).height(),$(item).height() + options.navBarHeight -$('body').offset().top))
+            })
         });
 
         if($.goFull.isFunction(options.done))
@@ -100,8 +102,8 @@
         );
 
     };
-    
-    
+
+
     //THANKS TO ALEX GRANDE FROM STACKOVERFLOW FOR THIS.
     $.goFull.isFunction = function(object) {
         return object && typeof object === 'function';

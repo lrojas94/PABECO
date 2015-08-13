@@ -1,10 +1,10 @@
 {% import 'macros.html.twig' as macros %}
-{% set block_id = b.block_title ~ "_" ~ b.id ~ "_id" %}
+{% set block_id = str_replace(' ','_',b.block_title) ~ "_" ~ b.id ~ "_id" %}
 
 
 {{ macros.blockStyle(block_id,b.block_color) }}
 
-<div class="col-xs-12 col-md-4 col-sm-6" id='{{block_id}}'>
+<div class="col-xs-12 col-sm-4 col-sm-6" id='{{block_id}}'>
     <div class="panel panel-default">
         <div class="panel-heading text-center">{{b.block_title}}</div>
         <div class="panel-body">

@@ -6,11 +6,11 @@ BlockSection
 {% block section_content %}
 
 <div id="{{section.section_title}}_id-2">
-    <div class='row' class='BlockSection-2'>
+    <div class='row' class='BlockStyle-Flexbox'>
     {% for b in section.blocks %}
       {% if loop.index0%3 == 0 %}
       </div>
-      <div class='row BlockSection-2'>
+      <div class='row BlockStyle-Flexbox'>
       {% endif %}
       {% include 'main/block_section_block.html.twig' %}
     {% endfor %}

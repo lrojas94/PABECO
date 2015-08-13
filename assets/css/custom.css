@@ -65,12 +65,12 @@ body,html{
     font-size: 15px;
 }
 
-.BlockSection-2{
+.BlockStyle-Flexbox{
   padding-left: 20px;
   padding-right: 20px;
 }
 
-.TextImageSection,#productos{
+.TextImageSection,.FullTextSection{
     background: #fff;
     font-size: 16px ;
     position: relative;
@@ -142,10 +142,10 @@ h1.pabeFont {
     position: absolute;
 }
 
-#productos-imgs{
+.ImageSection{
     height: 500px;
 }
-#productos-imgs div{
+.ImageSection div{
     height: 100%;
     background: grey;
     position: relative;
@@ -182,7 +182,16 @@ h1.pabeFont {
 }
 
 @media (min-width: 768px) and (max-width: 992px ){
-    .BlockSection-2,.BlockSection-2 > [class*="col-sm-6"]{
+    .BlockStyle-Flexbox {
+      -webkit-flex-direction: row;
+      flex-direction: row;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-align-content: flex-end;
+      align-content: flex-end;
+    }
+
+    .BlockStyle-Flexbox,.BlockStyle-Flexbox > [class*="col-sm-6"]{
         display: -webkit-box;
         display: -webkit-flex;
         display: flex;
@@ -191,10 +200,10 @@ h1.pabeFont {
 }
 
 @media(min-width: 992px ){
-    .BlockSection-2{
+    .BlockStyle-Flexbox{
         display: flex;
     }
-    .BlockSection,.BlockSection > [class*="col-"],.BlockSection-2 > [class*="col-"]{
+    .BlockSection,.BlockSection > [class*="col-"],.BlockStyle-Flexbox > [class*="col-"]{
         display: -webkit-box;
         display: -webkit-flex;
         display: flex;

@@ -3,14 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Main extends CI_Controller {
 
-    public function index()
-    {
-        $this->load->view("main_views/main.php");
-    }
-
-    public function test(){
-        $this->load->model('main/Section_model');
-        $data = $this->Section_model->get_all_sections();
+    public function index(){
+        $this->load->model('Section_model','Section');
+        $data = $this->Section->get_all_with_info();
         $this->twiggy->set('sections',$data);
         $this->twiggy->template('main/index')->display();
     }
@@ -37,27 +32,17 @@ class Main extends CI_Controller {
         $body = $this->input->post('msg');
 
         $this->email->from($from,$name);
-        $this->email->to('lrojas94@gmail.com');
-        $this->email->subject("Feedback sobre PABE.");
-        $message = <<<BODY
-        <div style="border: 1px solid #795B43;border-top: 20px solid #795B43;padding: 20px;font-size: 16px;
-        font-family: 'Avant Garde', Avantgarde, 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;">
-            <div style="text-align: justify;">
-                <p>
-                    {$body}
-                </p>
-                <p style="text-align: right;">
-                    - {$name}
-                </p>
-            </div>
-            <div>
-                <p>
-                    <h4 style="color: #795B43;margin-bottom: 5px;">Contacto</h4>
-                    Correo Electronico: {$from}
-                </p>
-            </div>
-        </div>
-BODY;
+
+        $this->email->to('serviciocliente@pabe.com.do');
+        // $this->email->to('lrojas94@gmail.com');
+        $this->email->subject("Feedback PABE. (Pagina Web)");
+        $this->twiggy->set(array(
+          'body' => $body,
+          'name' => $name,
+          'from' => $from
+        ));
+
+        $message = $this->twiggy->template('email')->render();
 
 
         $this->email->message($message);
@@ -65,14 +50,12 @@ BODY;
 
         if($this->email->send()){
             $result['status'] = 'success';
-            $result['file'] =  $_FILES['uploadedFile']['name'];
             echo json_encode($result);
         }
         else {
 
             $result['status'] = 'error';
             $result['error_msg'] = $this->mail->print_debugger();
-
             return json_encode($result);
         }
 

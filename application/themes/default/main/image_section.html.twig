@@ -1,0 +1,10 @@
+{% extends 'main/section.html.twig' %}
+{% block classes %}
+noPad ImageSection
+{% endblock %}
+
+{% block section_content %}
+  {% for image in section.images %}
+  <div><img class='centered-bg-fit' src="{{ base_url(image.image_url) }}"/></div>
+  {% endfor %}
+{% endblock %}

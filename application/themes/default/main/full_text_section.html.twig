@@ -1,0 +1,14 @@
+{% extends 'main/section.html.twig' %}
+{% block classes %}
+FullTextSection
+{% endblock %}
+
+{% block section_content %}
+  <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+      <h1 class="text-center pabeFont">{{section.data.title}}</h1>
+      <br/>
+      <p class='text-justify'>
+          {{section.data.text}}
+      </p>
+  </div>
+{% endblock %}
