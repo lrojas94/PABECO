@@ -3,18 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Section_model extends MY_Model {
     protected $return_type = 'array';
-    
+
     function __construct(){
         parent::__construct();
     }
 
     function get_all_with_info(){
-      $this->load->model('BlockSection_model','BlockSection');
-      $this->load->model('TextImageSection_model','TextImageSection');
-      $this->load->model('ImageSection_model','ImageSection');
-      $this->load->model('FullTextSection_model','FullTextSection');
+      $this->load->model('Blocksection_model','BlockSection');
+      $this->load->model('Textimagesection_model','TextImageSection');
+      $this->load->model('Imagesection_model','ImageSection');
+      $this->load->model('Fulltextsection_model','FullTextSection');
 
-      $query = $this->db->from('Sections')
+      $query = $this->db->from('sections')
                ->order_by('position','asc')
                ->get();
       $sections = $query->result_array();

@@ -1,0 +1,51 @@
+{% import 'macros.html.twig' as macros %}
+
+<!DOCTYPE html>
+<html id='login_html' lang="en">
+    <head>
+      {% include 'admin/headers.html.twig' %}
+    </head>
+    <body id='login_body'>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-sm-offset-3" id='login_container'>
+            <div class="row">
+              <img class="img img-responsive center-block" src="{{base_url('assets/img/logo.png')}}" alt="" />
+            </div>
+            <br>
+            <hr>
+            <div class='row'>
+              <div class="col-xs-10 col-xs-offset-1">
+                <form class="" action="{{base_url('admin/login')}}" method="post">
+                  <label class='center-block text-center'>Panel Administrativo</label>
+                  <br/>
+                  <div class="form-group">
+                    <label for="username">Nombre de Usuario</label>
+                    <input type="text" name="username" id="username" value="" placeholder="Nombre de Usuario" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Contrasena</label>
+                    <input type="password" name="password" id="password" value="" placeholder="Contrasena" class="form-control">
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="remember_me"> Recordarme
+                    </label>
+                  </div>
+                  {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                      <b>Error!</b> {{error_message}}
+                    </div>
+                  {% endif %}
+                  <input type="submit" value="Entrar" class="btn btn-info btn-block">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% include 'admin/javascript.html.twig' %}
+    </body>
+</html>

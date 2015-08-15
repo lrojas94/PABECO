@@ -11,3 +11,11 @@
     }
   </style>
 {% endmacro %}
+
+{% macro loadCSS(url)%}
+  <link href="{{ base_url(url) }}" rel="stylesheet">
+{% endmacro %}
+
+{% macro loadJS(url)%}
+  <script src="{{ base_url(url) }}"></script>
+{% endmacro %}

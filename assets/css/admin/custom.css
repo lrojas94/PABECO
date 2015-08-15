@@ -1,0 +1,15 @@
+#login_html,#login_body{
+  width: 100%;
+  background-color: #34495e;
+}
+
+#login_body{
+  margin-top : 50px;
+}
+
+#login_container{
+  background: white;
+  border : 1px solid #bdc3c7;
+  border-radius: 7px;
+  padding: 25px;
+}

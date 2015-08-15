@@ -1,24 +1,14 @@
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
-<!--   <link rel="icon" href="../../favicon.ico">-->
-
-<title>Bienvenido a PABE Comercial</title>
+{% extends 'headers.html.twig' %}
+{% block title %}
+Bienvenido a PABE Comercial
+{% endblock %}
+{% block custom_includes %}
+{{ macros.loadCSS('assets/slick/slick.css') }}
+{{ macros.loadCSS('assets/slick/slick-theme.css') }}
+{{ macros.loadCSS('assets/css/goFull.css') }}
+{{ macros.loadCSS('assets/css/scrolling-nav.css') }}
+{{ macros.loadCSS('assets/css/custom.css') }}
 <!--PACE-->
-<link href="{{ base_url("assets/css/paceTheme.css") }}" rel="stylesheet">
-<script src="{{ base_url('assets/js/pace.min.js') }}"></script>
-<!-- Bootstrap core CSS -->
-<link href='http://fonts.googleapis.com/css?family=Lato:300,400|Montserrat' rel='stylesheet' type='text/css'>
-<link href="{{ base_url("assets/css/bootstrap.min.css") }}" rel="stylesheet">
-<link href="{{ base_url("assets/slick/slick.css") }}" rel="stylesheet">
-<link href="{{ base_url("assets/slick/slick-theme.css") }}" rel="stylesheet">
-<link href="{{ base_url("assets/css/goFull.css") }}" rel="stylesheet">
-<link href="{{ base_url("assets/css/scrolling-nav.css") }}" rel="stylesheet">
-<link href="{{ base_url("assets/css/custom.css") }}" rel="stylesheet">
-<script>
-    var baseURL = "{{ base_url() }}index.php" ;
-    //alert(baseURL)
-</script>
+{{ macros.loadCSS('assets/css/paceTheme.css') }}
+{{ macros.loadJS('assets/js/pace.min.js') }}
+{% endblock %}
