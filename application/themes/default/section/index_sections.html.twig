@@ -1,0 +1,88 @@
+<div role="tabpanel" class="tab-pane" id="sections">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="text-justify">
+          A continuacion se muestran las secciones contenidas en la pagina. Ademas, se permite que el usuario cree y desarrolle
+          sus propias secciones. Notese que, con el tiempo, los tipos de secciones podran cambiar y/o volverse mas extensos.
+          <br>
+        </p>
+        <div class="alert alert-info">
+            <b>Importante!</b> Las secciones que aparecen <b>"Sin titulo"</b> no se mostraran en la barra de navegacion de la pagina web.
+            Este tipo de secciones son utiles para, por ejemplo, secciones de imagenes o secciones que sean consideradas "sub-secciones."
+        </div>
+        {% if important_message %}
+          <div class="alert alert-danger">
+              <b>Importante!</b> {{important_message}}
+          </div>
+        {% endif %}
+        <a href="{{base_url("site/#{site_info.id}/section/add")}}">
+        <button type="button"  class="btn btn-primary">
+          Agregar Nueva Seccion
+        </button>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table">
+          <thead>
+            <th>
+              #
+            </th>
+            <th>
+              Nombre
+            </th>
+            <th>
+              Tipo
+            </th>
+            <th>
+              Accion
+            </th>
+          </thead>
+          <tbody>
+            {% for section in site_info.sections %}
+                <tr>
+                  <td>
+                    {{loop.index}}
+                  </td>
+                  <td>
+                    {% if section.section_title == '' %}
+                        <span class='label label-info'>Sin titulo</span>
+                    {% else %}
+                        {{section.section_title}}
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if section.section_type == 'block' %}Bloque{% endif %}
+                    {% if section.section_type == 'text_image' %}Texto con Imagen{% endif %}
+                    {% if section.section_type == 'image' %}Imagenes{% endif %}
+                    {% if section.section_type == 'full_text' %}Texto{% endif %}
+                  </td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-success dropdown-toggle" type="button"
+                      id="drop_down_{{loop.index0}}" data-section-id='{{section.id}}' data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Menu
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="{{base_url("site/#{site_info.id}/section/move_up/#{section.id}")}}">Mover Arriba</a></li>
+                        <li><a href="{{base_url("site/#{site_info.id}/section/move_down/#{section.id}")}}">Mover Abajo</a></li>
+                        <li><a href="{{base_url("site/#{site_info.id}/section/edit/#{section.id}")}}">
+                          <span class='text-warning'>Editar</span>
+                        </a></li>
+                        <li><a href="{{base_url("site/#{site_info.id}/section/delete/#{section.id}")}}">
+                          <span class='text-danger'>Eliminar</span>
+                        </a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

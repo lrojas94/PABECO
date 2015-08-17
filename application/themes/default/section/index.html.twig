@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include 'section/headers.html.twig' %}
+    </head>
+    <body>
+      <div class="container-fluid">
+        <div class="jumbotron">
+          <h1>{{site_info.name}}</h1>
+          <p>
+            {{site_info.description}}
+          </p>
+        </div>
+      </div>
+      <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#homescreen" aria-controls="home" role="tab" data-toggle="tab">Pantalla de Inicio</a></li>
+          <li role="presentation"><a href="#sections" aria-controls="profile" role="tab" data-toggle="tab">Secciones</a></li>
+          <li role="presentation"><a href="#contact" aria-controls="messages" role="tab" data-toggle="tab">Contacto</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="homescreen"></div>
+          {% include 'section/index_sections.html.twig' %}
+          <div role="tabpanel" class="tab-pane" id="contact"></div>
+        </div>
+      </div>
+
+        {% include 'section/javascript.html.twig' %}
+    </body>
+</html>

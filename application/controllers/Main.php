@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Main extends CI_Controller {
 
-    public function index(){
+    public function index($site_id = 0){
         $this->load->model('Section_model','Section');
-        $data = $this->Section->get_all_with_info();
+        $data = $this->Section->get_all_with_info($site_id);
         $this->twiggy->set('sections',$data);
         $this->twiggy->template('main/index')->display();
     }

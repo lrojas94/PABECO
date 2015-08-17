@@ -8,16 +8,13 @@ class Section_model extends MY_Model {
         parent::__construct();
     }
 
-    function get_all_with_info(){
+    function get_all_with_info($site_id){
       $this->load->model('Blocksection_model','BlockSection');
       $this->load->model('Textimagesection_model','TextImageSection');
       $this->load->model('Imagesection_model','ImageSection');
       $this->load->model('Fulltextsection_model','FullTextSection');
-
-      $query = $this->db->from('sections')
-               ->order_by('position','asc')
-               ->get();
-      $sections = $query->result_array();
+      $this->db->order_by('position','asc');
+      $sections = $this->get_many_by('id_site',$site_id);
       foreach($sections as &$section) {
         switch ($section['section_type']) {
           case 'block':
@@ -43,6 +40,15 @@ class Section_model extends MY_Model {
       }
 
       return $sections;
+    }
+
+    function get_all_with_site_info($site_id){
+      $this->load->model('Site_model',"sites");
+      $site = $this->sites->get($site_id);
+      $this->db->order_by('position','asc');
+      $sections  = $this->get_many_by('id_site',$site_id);
+      $site['sections'] = $sections;
+      return $site;
     }
 }
 

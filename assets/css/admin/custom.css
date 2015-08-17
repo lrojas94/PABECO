@@ -13,3 +13,24 @@
   border-radius: 7px;
   padding: 25px;
 }
+
+.container-fluid{
+  padding: 0px;
+}
+
+.jumbotron{
+  background-color: #3498db;
+  color: white;
+}
+
+.btn a{
+  color: white;
+}
+.btn a:hover{
+  color: white;
+  text-decoration: none;
+}
+
+.tab-pane{
+  margin-top:20px;
+}
