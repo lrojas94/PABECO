@@ -162,8 +162,14 @@ class Section extends MY_Controller {
 			}
 
 			$section_id = $this->input->post('is_edit') ? $this->input->post('is_edit') : $this->db->insert_id();
-			if($section_data['section_type'] == 'block'){
-				$this->add_update_block_data($section_id);
+			switch ($section_data['section_type']) {
+				case 'block':
+					$this->add_update_block_data($section_id);
+					break;
+
+				default:
+					# code...
+					break;
 			}
 		}
 		redirect('site/'.$site_id.'/section'); //Can't access this site another way.
@@ -180,5 +186,36 @@ class Section extends MY_Controller {
 		$this->twiggy->template('section/add')->display();
 
 
+	}
+
+	public function ajax_section_type($section_type,$section_id = ''){
+		$this->load->model("Section_model",'sections');
+		switch ($section_type) {
+			case 'block':
+				if($section_id != ''){
+					//Load data C:
+					$section = $this->sections->get($section_id);
+					$this->load->model('Blocksection_model','blocks');
+					$section['blocks'] = $this->blocks->get_many_by('section_id',$section_id);
+					$this->twiggy->set('section',$section);
+				}
+				$output = $this->twiggy->render('section/add_block_section');
+				$this->output->set_output($output);
+				return;
+			case 'full_text':
+			if($section_id != ''){
+				//Load data C:
+				$section = $this->sections->get($section_id);
+				$this->load->model('Fulltextsection_model','fulltext');
+				$section['data'] = $this->fulltext->get_by('section_id',$section_id);
+				$this->twiggy->set('section',$section);
+			}
+			$output = $this->twiggy->render('section/add_fulltext_section');
+			$this->output->set_output($output);
+			return;
+			default:
+				# code...
+				break;
+		}
 	}
 }

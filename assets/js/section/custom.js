@@ -45,6 +45,16 @@ function fixBlocks(block){
   });
 }
 
+function fixFullText(){
+  $('.fulltext').tinymce({
+    theme: 'modern',
+    plugins : "textcolor colorpicker",
+    toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | forecolor backcolor",
+    content_css: baseUrl + 'assets/js/tinymce/custom.css',
+    statusbar : false
+  });
+}
+
 function readURL(input){
   if(input.files && input.files[0]){
     var reader = new FileReader();
@@ -66,6 +76,27 @@ $(function(){
     $('.templateIcon').removeClass('active');
     $(selected).addClass('active');
     $('input[name=section_type]').val($(selected).data('section-type'));
+    var selected_type = $(selected).data('section-type');
+    var id = $('input[name=is_edit]').val();
+    $.ajax({
+      url: baseUrl + 'section/ajax_section_type/' + selected_type + '/' + id ,
+      type: 'POST',
+      dataType: 'html',
+      success: function(response){
+        $('#section_info').html(response);
+        switch (selected_type) {
+          case 'block':
+            fixBlocks();
+            break;
+          case 'full_text':
+            fixFullText();
+            break;
+          default:
+
+        }
+      }
+    });
+
   });
 
   $('input[name=section-color_picker]').ColorPicker({
@@ -106,6 +137,9 @@ $(function(){
           modalBody+= 'Para crear una seccion de bloques se requiere <b>no menos</b> de un bloque. ';
           showError = true;
         }
+        break;
+      case "full_text":
+        fixFullText();
         break;
       default:
     }

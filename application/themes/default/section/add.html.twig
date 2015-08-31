@@ -36,25 +36,25 @@
         <div class="row" >
           <!--Image Templates-->
           <div class="col-xs-6 col-md-3 ">
-            <div class="templateIcon active" data-section-type='block'>
+            <div class="templateIcon {% if section.section_type == 'block' or not section %}active{% endif %}" data-section-type='block'>
               <img class='block center-block img img-responsive' src="{{base_url('assets/img/template_icons/block.png')}}" alt="X" />
               <h3 class='text-center'>Bloque</h3>
             </div>
           </div>
           <div class="col-xs-6 col-md-3 ">
-            <div class="templateIcon" data-section-type='full_text'>
+        <div class="templateIcon {% if section.section_type == 'full_text' %}active{% endif %}" data-section-type='full_text'>
               <img class='block center-block img img-responsive' src="{{base_url('assets/img/template_icons/full_text.png')}}" alt="X" />
               <h3 class='text-center'>Texto</h3>
             </div>
           </div>
           <div class="col-xs-6 col-md-3 ">
-            <div class="templateIcon"  data-section-type='image'>
+        <div class="templateIcon {% if section.section_type == 'image' %}active{% endif %}"  data-section-type='image'>
               <img class='block center-block img img-responsive' src="{{base_url('assets/img/template_icons/image.png')}}" alt="X" />
               <h3 class='text-center'>Imagenes</h3>
             </div>
           </div>
-          <div class="col-xs-6 col-md-3 "  data-section-type='text_image'>
-            <div class="templateIcon">
+          <div class="col-xs-6 col-md-3 "  >
+        <div class="templateIcon {% if section.section_type == 'text_image' %}active{% endif %}" data-section-type='text_image'>
               <img class='block center-block img img-responsive' src="{{base_url('assets/img/template_icons/text_image.png')}}" alt="X" />
               <h3 class='text-center'>Texto + Imagen</h3>
             </div>
@@ -133,7 +133,13 @@
               </div>
               <br>
               <div id='section_info'>
-                  {% include 'section/add_block_section.html.twig' %}
+                  {% if section.section_type == 'block' %}
+                    {% include 'section/add_block_section.html.twig' %}
+                  {% elseif section.section_type == 'full_text' %}
+                    {% include 'section/add_block_section.html.twig' %}
+                  {% else %}
+                    {% include 'section/add_block_section.html.twig' %}
+                  {% endif %}
               </div>
               {% if is_edit %}
               <input type="submit" class="btn btn-primary btn-block" value = 'Finalizar Edicion' id="submit-form">
