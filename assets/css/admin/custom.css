@@ -34,3 +34,78 @@
 .tab-pane{
   margin-top:20px;
 }
+
+.nav-tabs > li.active{
+  border-top: 3px solid #3498DB;
+  overflow: hidden;
+}
+.nav-tabs > li > a{
+  margin-right: 0px;
+}
+
+.templateIcon{
+  padding: 10px;
+  border-radius: 7px;
+  border: 2px solid #3498DB;
+  -webkit-transition: all 0.5s ease; /* Safari */
+  transition: all 0.5s ease;
+}
+
+.templateIcon:hover{
+  cursor: pointer
+}
+
+.templateIcon.active, .templateIcon:hover{
+  background-color: #3498DB;
+  color: white;
+}
+
+input[type=color]{
+  padding: 0px;
+}
+
+.noPad{
+  padding: 0px;
+}
+
+.noPad-left{
+  padding-left: 0px;
+}
+
+.noPad-right{
+  padding-right: 0px;
+}
+
+span.btn-file {
+  overflow: hidden;
+  position: relative;
+}
+
+span.btn-file input[type=file],span.btn-file input[type=color]{
+  position:absolute;
+  top: 0px;
+  left:0px;
+  opacity: 0;
+  min-width: 100%;
+  min-height: 100%;
+  display: block;
+}
+
+
+
+#section_image-color{
+  height: 200px;
+  border: 1px solid #3498DB;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+#error_modal .modal-header{
+  background: #e74c3c;
+  color: white;
+}
+
+
+#error_modal .modal-footer{
+  padding: 5px;
+}

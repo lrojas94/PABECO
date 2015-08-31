@@ -1,0 +1,10 @@
+{% import 'macros.html.twig' as macros %}
+<button type="button" name="button" id='add-block-btn' class='btn btn-success'>Agregar bloque</button>
+<br>
+<br>
+<div id="blocks-area">
+  {{macros.blockTemplate(true)}}
+  {% for b in section.blocks %}
+    {{macros.blockTemplate(false,b)}}
+  {% endfor %}
+</div>

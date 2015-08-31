@@ -1,0 +1,174 @@
+{% if site_info.item_info %}
+  {% set title = 'Actualizando seccion de: ' %}
+{% else %}
+  {% set title = 'Agregando seccion a ' %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include 'section/headers.html.twig' %}
+    </head>
+    <body>
+      <div class="container-fluid">
+        <div class="jumbotron">
+          <h1>{{title ~ site_info.name}}</h1>
+          <p>
+            {{site_info.description}}
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        {% if error_msg %}
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="alert alert-danger">{{error_msg}}</div>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="row">
+          <div class="col-xs-12">
+            <h2 class='text-center'>Tipo de Seccion</h2>
+          </div>
+        </div>
+        <br>
+        <div class="row" >
+          <!--Image Templates-->
+          <div class="col-xs-6 col-md-3 ">
+            <div class="templateIcon active" data-section-type='block'>
+              <img class='block center-block img img-responsive' src="{{base_url('assets/img/template_icons/block.png')}}" alt="X" />
+              <h3 class='text-center'>Bloque</h3>
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-3 ">
+            <div class="templateIcon" data-section-type='full_text'>
+              <img class='block center-block img img-responsive' src="{{base_url('assets/img/template_icons/full_text.png')}}" alt="X" />
+              <h3 class='text-center'>Texto</h3>
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-3 ">
+            <div class="templateIcon"  data-section-type='image'>
+              <img class='block center-block img img-responsive' src="{{base_url('assets/img/template_icons/image.png')}}" alt="X" />
+              <h3 class='text-center'>Imagenes</h3>
+            </div>
+          </div>
+          <div class="col-xs-6 col-md-3 "  data-section-type='text_image'>
+            <div class="templateIcon">
+              <img class='block center-block img img-responsive' src="{{base_url('assets/img/template_icons/text_image.png')}}" alt="X" />
+              <h3 class='text-center'>Texto + Imagen</h3>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class='row' >
+          <div class="col-xs-12">
+            <form class="form" action="{{base_url("site/"~site_info.id~"/section/modify")}}" method="post" enctype='multipart/form-data'>
+              <input type="hidden" name='section_type' value="{{section.section_type|default('block')}}">
+              {% if is_edit %}
+              <input type="hidden" value="{{section.id}}" name='is_edit'>
+              {% endif %}
+              <div class='form-group'>
+                <label for='form_title_id'>
+                  Titulo de la Seccion:
+                </label>
+                <input class = 'form-control' id='form_title_id' type="text" name="title" value="{{section.section_title}}" placeholder="Deje el titulo vacio si esta es una sub-seccion">
+              </div>
+              <div class="row">
+                <div class='form-group'>
+                  <label for='form_title_id'>
+                    Imagen/Color de Fondo
+                  </label>
+                  <div class="col-xs-6 col-md-4">
+                    <div id='section_image-color' style='background-color:
+                    {% if substr(section.background,0,1) == '#' %}
+                      {{section.background}}
+                    {% else %}
+                      #2c3e50
+                    {% endif %}
+                    '>
+                      <img src='
+                      {% if substr(section.background,0,1) == '/' %}
+                        {{base_url(section.background)}}
+                      {% endif %}
+                      ' alt=''>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-md-8 noPad-left">
+                    <div class="alert alert-info">
+                      <b>NOTA:</b> Es importante que sepa que el hecho de escoger algun color de fondo
+                      removera la imagen seleccionada. No cambie el color si pretende mantener una imagen
+                      de fondo.
+                    </div>
+                    <span class='btn btn-info btn-block btn-file'>
+                      Subir Imagen
+                      <input type="file" data-target='#section_image-color img' name="section-image_upload"
+                      accept="image/gif, image/jpeg, image/png" value="">
+                    </span>
+
+                    <span class='btn btn-warning btn-block btn-file'>
+                      Cambiar color de Fondo
+                      <input type="color" name="section-color_picker" value="#2C3E50"
+                      data-target='#section_image-color'>
+                    </span>
+                    <span class='text-danger'><b>Nota:</b> Para salvar los cambios de color, hacer click en el boton de abajo a la derecha.</span>
+                    <br>
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="insert_after">
+                  Insertar luego de la seccion:
+                </label>
+                <select class="form-control" name="insert_after">
+                  <option value='-1'>Inicio</option>
+                  {% for s in site_info.sections if ((is_edit and section.id != s.id) or not is_edit) and s.section_title != '' %}
+                  <option value="{{s.id}}" {% if is_edit and section.position == (s.position + 1) %}selected{% endif %}>
+                    {{s.section_title}}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <br>
+              <div id='section_info'>
+                  {% include 'section/add_block_section.html.twig' %}
+              </div>
+              {% if is_edit %}
+              <input type="submit" class="btn btn-primary btn-block" value = 'Finalizar Edicion' id="submit-form">
+              {% else %}
+              <input type="submit" class="btn btn-primary btn-block" value = 'Agregar Seccion' id="submit-form">
+              {% endif %}
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      {#
+        Error's modal
+      #}
+      <div class="modal fade" id='error_modal'>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+              <p>
+
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <br>
+        {% include 'section/javascript.html.twig' %}
+    </body>
+</html>

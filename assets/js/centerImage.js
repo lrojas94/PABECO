@@ -1,3 +1,6 @@
+/**
+ * Created by Luis Rojas on 5/25/2015.
+ */
 (function($) {
     $.fn.extend({
         centerImage: function(options) {
@@ -28,10 +31,15 @@
             overflow: 'hidden'
         });
 
+        //Clear item:
+        $(item).removeAttr('style');
+
+        var _item = item; //Keep the item in case we need it.
+
         if(options.fitContainer){
             //Make sure tot fit :(
             $(item).css(
-           /*IF*/     $(item).width() > $(item).height() ?
+         /*IF*/ $(item).width() > $(item).height() ?
                 {
                     height: Math.max($(parent).height(),$(parent).width()),
                     width: 'auto'
@@ -51,6 +59,33 @@
             });
         }
 
+        if(options.inside){ //DO NOT GO OVER CONTAINER:
+          $(item).css({
+              maxWidth: Math.round($(parent).outerWidth())+2,
+              maxHeight: Math.round($(parent).outerHeight())+2
+          });
+        }
+
+        if(options.keepAspectRatio){
+          var height = $(_item).height();
+          var width = $(_item).width();
+          var newHeight = 0, newWidth = 0;
+          if(height > width){
+            var aspectRatio = width/height;
+            newHeight = $(item).height();
+            newWidth = (newHeight * aspectRatio);
+          }
+          else{
+              var aspectRatio = height/width;
+              newWidth = $(item).width();
+              newHeight = newWidth * aspectRatio;
+          }
+          $(item).css({
+              width: newWidth,
+              height: newHeight
+          });
+        }
+
         $(item).css({
             position: "absolute",
             left: Math.round($(parent).outerWidth() / 2) - Math.round($(item).outerWidth() / 2),
@@ -61,6 +96,8 @@
     // option defaults
     $.centerImage.defaults = {
         fitContainer: false,
+        inside:false,
+        keepAspectRatio: true,
         minFit: true
     };
 
@@ -73,6 +110,4 @@
     };
 
 
-})(jQuery);/**
- * Created by Luis on 5/25/2015.
- */
+})(jQuery);
