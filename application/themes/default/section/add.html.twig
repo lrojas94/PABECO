@@ -125,7 +125,10 @@
                 <select class="form-control" name="insert_after">
                   <option value='-1'>Inicio</option>
                   {% for s in site_info.sections if ((is_edit and section.id != s.id) or not is_edit) and s.section_title != '' %}
-                  <option value="{{s.id}}" {% if is_edit and section.position == (s.position + 1) %}selected{% endif %}>
+                  <option value="{{s.id}}"
+                  {% if (is_edit and section.position == (s.position + 1)) or (secion.title == '' and s.position == section.position) %}
+                    selected
+                  {% endif %}>
                     {{s.section_title}}
                   </option>
                   {% endfor %}
@@ -136,7 +139,7 @@
                   {% if section.section_type == 'block' %}
                     {% include 'section/add_block_section.html.twig' %}
                   {% elseif section.section_type == 'full_text' %}
-                    {% include 'section/add_block_section.html.twig' %}
+                    {% include 'section/add_fulltext_section.html.twig' %}
                   {% else %}
                     {% include 'section/add_block_section.html.twig' %}
                   {% endif %}

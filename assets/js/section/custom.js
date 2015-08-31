@@ -71,6 +71,10 @@ function readURL(input){
 }
 
 $(function(){
+
+  fixBlocks();
+  fixFullText();
+
   $('.templateIcon').click(function(){
     var selected = $(this);
     $('.templateIcon').removeClass('active');
@@ -114,7 +118,6 @@ $(function(){
   $('input[name=section-image_upload]').change(function(){
     readURL(this);
   });
-  fixBlocks();
   $('#add-block-btn').click(function(){
     var block = $('#block-template').clone().removeClass('hidden')
                                     .removeAttr('id').appendTo('#blocks-area')

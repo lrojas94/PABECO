@@ -45,7 +45,10 @@ class Section extends MY_Controller {
 				$blocks = $this->blocks->get_many_by('section_id',$section['id']);
 				$section['blocks'] = $blocks;
 				break;
-
+			case 'full_text':
+				$this->load->model('Fulltextsection_model','fulltext');
+				$section['data'] = $this->fulltext->get_by('section_id',$section['id']);
+				break;
 			default:
 				# code...
 				break;
@@ -82,6 +85,21 @@ class Section extends MY_Controller {
 				$this->blocks->insert($block_data);
 			else
 				$this->blocks->update($post['block-id'][$i],$block_data);
+		}
+	}
+
+	private function add_update_fulltext_data($section_id){
+		$this->load->model('Fulltextsection_model','fulltext');
+		$post = $this->input->post();
+		$data = array(
+			'title' => $post['text-title'],
+			'text' => $post['content'],
+			'section_id' => $section_id
+		);
+		if($this->input->post('fulltext_id'))
+			$this->fulltext->update($post['fulltext_id'],$data);
+		else {
+			$this->fulltext->insert($data);
 		}
 	}
 
@@ -130,19 +148,26 @@ class Section extends MY_Controller {
 			$section_position = -1;
 			$section_data['position'] = 1;
 		}
+		else if($section_data['section_title'] == 0){
+			$parent_section = $this->sections->get($section_id);
+			$section_data['position'] = $parent_section['position'];
+		}
+		else{
+			for($i = 0; $i < $section_count;$i++){
+				if($section_id == $sections[$i]['id']){
+					$should_add = true;
+					$section_position = $sections[$i]['position'];
+					$section_data['position'] = $section_position + 1;
+				}
 
-		for($i = 0; $i < $section_count;$i++){
-			if($section_id == $sections[$i]['id']){
-				$should_add = true;
-				$section_position = $sections[$i]['position'];
-				$section_data['position'] = $section_position + 1;
-			}
-
-			if($should_add && $section_position != $sections[$i]['position']){
-				$new_pos = array('position' => $sections[$i]['position'] + 1);
-				$this->sections->update($sections[$i]['id'],$new_pos);
+				if($should_add && $section_position != $sections[$i]['position']){
+					$new_pos = array('position' => $sections[$i]['position'] + 1);
+					$this->sections->update($sections[$i]['id'],$new_pos);
+				}
 			}
 		}
+
+
 
 		return $section_data;
 	}
@@ -166,7 +191,8 @@ class Section extends MY_Controller {
 				case 'block':
 					$this->add_update_block_data($section_id);
 					break;
-
+				case 'full_text':
+					$this->add_update_fulltext_data($section_id);
 				default:
 					# code...
 					break;
