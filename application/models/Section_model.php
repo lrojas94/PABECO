@@ -14,6 +14,7 @@ class Section_model extends MY_Model {
       $this->load->model('Imagesection_model','ImageSection');
       $this->load->model('Fulltextsection_model','FullTextSection');
       $this->db->order_by('position','asc');
+      $this->db->order_by('section_title','desc');
       $sections = $this->get_many_by('id_site',$site_id);
       foreach($sections as &$section) {
         switch ($section['section_type']) {
@@ -46,6 +47,7 @@ class Section_model extends MY_Model {
       $this->load->model('Site_model',"sites");
       $site = $this->sites->get($site_id);
       $this->db->order_by('position','asc');
+      $this->db->order_by('section_title','desc');
       $sections  = $this->get_many_by('id_site',$site_id);
       $site['sections'] = $sections;
       return $site;

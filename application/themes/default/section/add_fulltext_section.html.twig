@@ -1,0 +1,11 @@
+{% if section %}
+<input type="hidden" name="fulltext_id" value='{{section.data.id}}'>
+{% endif %}
+<div class="form-group">
+  <label for="text-title">Titulo del Articulo/Texto</label>
+  <input type="text" name="text-title" class="form-control" value='{{section.data.title}}' placeholder="Titulo del Texto">
+</div>
+<div class="form-group">
+  <label for="content">Contenido de la pagina:</label>
+  <textarea name="content" rows="8" class='fulltext form-control'>{{section.data.text}}</textarea>
+</div>
