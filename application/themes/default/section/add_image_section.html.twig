@@ -1,0 +1,39 @@
+{% if section %}
+<input type="hidden" name="fulltext_id" value='{{section.data.id}}'>
+{% endif %}
+<label for="">Imagenes en esta seccion</label>
+<div class="btn btn-block btn-success" id="dropzone-space">Agregar Imagenes</div>
+<div class="row" id='image_section-container'>
+  <span id='delete-image-template' hidden>
+    {{base_url('site/'~ section.id_site ~ '/section/ajax_delete_image/')}}
+  </span>
+  {% for img in section.data %}
+      <div class="col-xs-4">
+        <div class="table-image">
+          <img class='center-image-full-inside' src="{{base_url(img.image_url)}}" alt=""/>
+        </div>
+        <span class="spinner-container btn btn-danger btn-block ajax-delete_image">
+          <a href='{{base_url('site/'~ section.id_site ~ '/section/ajax_delete_image/' ~ img.id)}}'>
+              Borrar Imagen
+          </a>
+        </span>
+
+      </div>
+  {% endfor %}
+</div>
+<br>
+
+<div id='dropzone-template' hidden>
+  <div class="col-xs-4">
+    <div class="table-image"><img data-dz-thumbnail /></div>
+    <div class="progress"><span class="progress-bar progress-bar-info progress-bar-striped" data-dz-uploadprogress></span></div>
+    <div class='alert alert-danger' hidden><span data-dz-errormessage>Hubo un problema en el servidor o subiendo el archivo. Revise su conexion a internet.</span></div>
+    <span data-dz-name hidden></span>
+    <span data-dz-size hidden></span>
+    <span class="spinner-container btn btn-danger btn-block ajax-delete_image" data-dz-remove hidden>
+      <a>
+        Borrar Imagen
+      </a>
+    </span>
+  </div>
+</div>

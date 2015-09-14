@@ -5,8 +5,10 @@ class Main extends CI_Controller {
 
     public function index($site_id = 0){
         $this->load->model('Section_model','Section');
+        $this->load->model('Homepage_model','homepage');
         $data = $this->Section->get_all_with_info($site_id);
         $this->twiggy->set('sections',$data);
+        $this->twiggy->set('homepage',$this->homepage->get_by('site_id',$site_id));
         $this->twiggy->template('main/index')->display();
     }
 

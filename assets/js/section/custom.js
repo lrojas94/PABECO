@@ -55,25 +55,123 @@ function fixFullText(){
   });
 }
 
-function readURL(input){
+function fixTextImage(){
+  options = {
+    keepAspectRatio: true,
+    fitContainer:true
+  }
+  $('#image_text.btn-image-picker').change(function(){
+    readURL(this,options);
+  });
+  $('#text_image-template img').centerImage(options)
+
+}
+
+
+function fixImages(){
+  var options = {
+    keepAspectRatio: true,
+    fitContainer:true
+  }
+
+  function setDeleteLinks(item){
+    item = typeof(item) == 'undefined' ? $('.ajax-delete_image') : item;
+    $(item).click(function(e){
+      e.preventDefault();
+      var link = '';
+      var button;
+      if($(this).tagName == 'A'){
+        link  = $(this).attr('href');
+        button = $(this).parent();
+      }
+      else{
+        link = $(this).children('a').attr('href');
+        button = $(this);
+      }
+      $(button).children('a').css('visibility','hidden');
+      $(button).spin({scale : 0.5});
+
+      $.ajax({
+        url: link,
+        type: 'post',
+        dataType: 'json',
+        success: function(response){
+          if(response.status === 'success'){
+             $(button).closest('.col-xs-4').fadeOut('fast', function() {
+               $(this).remove();
+             });
+          }
+          else{
+            $(button).spin(false);
+            $(button).children('a').css('visibility','visible').text("Error borrando imagen.");
+          }
+        },
+        error: function(response){
+          $(button).spin(false);
+          $(button).children('a').css('visibility','visible').text("Error borrando imagen.");
+        }
+
+      });
+
+    });
+  }
+
+  setDeleteLinks();
+
+  $('#dropzone-space').dropzone({
+    url:baseUrl + 'site/0/section/ajax_image_upload',
+    previewTemplate: $('#dropzone-template').html(),
+    previewsContainer:'#image_section-container',
+    thumbnailWidth: 500,
+    thumbnailHeight: null,
+    acceptedFiles: 'image/*',
+    addedfile: function(file) {
+      file.previewElement = Dropzone.createElement(this.options.previewTemplate.trim());
+      $(this.options.previewsContainer).append(file.previewElement);
+    },
+    thumbnail: function(file, dataUrl) {
+      $(file.previewElement).find('.table-image img').attr('src', dataUrl).centerImage(options);
+    },
+    complete: function(file){
+      $(file.previewElement).find('.progress').prop('hidden', 'true');
+    },
+    success:function(file,response){
+      response = JSON.parse(response);
+
+      $(file.previewElement).find('span.btn').removeAttr('hidden');
+      if(response.status == 'success'){
+        $(file.previewElement).find('span.btn a').attr('href',$('#delete-image-template').text() + '/' + response.id);
+      }
+    },
+    error: function(file){
+      $(file.previewElement).find('.alert').removeAttr('hidden');
+    },
+    dictDefaultMessage : "Utilice este espacio para subir sus imagenes"
+  });
+
+  $('.center-image-full-inside').centerImage(options);
+}
+
+function readURL(input,options){
+  options = typeof(options) == 'undefined' ? {
+    inside:true,
+    keepAspectRatio:true,
+    minFit:false
+  } : options;
   if(input.files && input.files[0]){
     var reader = new FileReader();
     $(reader).load(function(e){
-      $($(input).data('target')).attr('src', e.target.result).centerImage(
-        {
-          inside:true,
-          keepAspectRatio:true,
-          minFit:false
-        });
+      $($(input).data('target')).attr('src', e.target.result).centerImage(options);
     });
     reader.readAsDataURL(input.files[0]);
   }
 }
 
 $(function(){
-
-  fixBlocks();
-  fixFullText();
+  Dropzone.autoDiscover = false;
+  $(window).load(function(){
+    fixTextImage();
+  });
 
   $('.templateIcon').click(function(){
     var selected = $(this);
@@ -95,6 +193,12 @@ $(function(){
           case 'full_text':
             fixFullText();
             break;
+          case 'text_image':
+            fixFullText(); //Basically to get WYSIWYG feature.
+            fixTextImage();
+            break;
+          case 'image':
+            fixImages();
           default:
 
         }
@@ -115,7 +219,7 @@ $(function(){
     }
   });
 
-  $('input[name=section-image_upload]').change(function(){
+  $('.btn-image-picker').change(function(){
     readURL(this);
   });
   $('#add-block-btn').click(function(){
@@ -153,4 +257,11 @@ $(function(){
       event.preventDefault();
     }
   });
-})
+
+  $('#section_image-color img').centerImage();
+
+  fixBlocks();
+  fixFullText();
+  fixTextImage();
+  fixImages();
+});

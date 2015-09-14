@@ -1,0 +1,26 @@
+<div class="flex-container">
+  {% if section %}
+  <input type="hidden" name="text_image_id" value='{{section.data.id}}'>
+  {% endif %}
+  <div class="col-xs-6 noPad-left">
+    <div class="form-group">
+      <label for="title">Titulo</label>
+      <input type="text" class="form-control" name="text-title" value='{{section.data.title}}' placeholder="Titulo">
+    </div>
+    <div class="form-group">
+      <label for="content">Contenido</label>
+      <textarea name="text-content" rows="10" class="form-control fulltext">{{section.data.text}}</textarea>
+    </div>
+  </div>
+  <div class="col-xs-6 noPad-right flex-container flex-column">
+    <label>Imagen</label>
+    <div class="imageTemplate flex-item " id='text_image-template'>
+      <img src="{{base_url(section.data.img_url)}}">
+    </div>
+    <button class="btn btn-success btn-file btn-block" >
+      Agregar/Editar Imagen
+      <input type="file" name="text-image" class='btn-image-picker' accept="image/gif, image/jpeg, image/png"
+      value="" data-target='#text_image-template img' id='image_text'>
+    </button>
+  </div>
+</div>
