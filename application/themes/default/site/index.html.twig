@@ -17,14 +17,15 @@
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="{% if active == 'homescreen' %}active{% endif %}"><a href="#homescreen" aria-controls="homescreen" role="tab" data-toggle="tab">Pantalla de Inicio</a></li>
           <li role="presentation" class='{% if active == 'section' %}active{% endif %}'><a href="#sections" aria-controls="sections" role="tab" data-toggle="tab">Secciones</a></li>
-          <li role="presentation" clas='{% if active == 'contact' %}active{% endif %}'><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contacto</a></li>
+          <li role="presentation" class='{% if active == 'contact' %}active{% endif %}'><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contacto</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
           {% include 'site/index_homescreen.html.twig' %}
           {% include 'site/index_sections.html.twig' %}
-          <div role="tabpanel" class="tab-pane {% if active == 'contact' %}active{% endif %}" id="contact"></div>
+          {% include 'site/index_contact.html.twig' %}
+
         </div>
       </div>
 

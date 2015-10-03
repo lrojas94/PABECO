@@ -1,0 +1,41 @@
+<div role="tabpanel" class="tab-pane {% if active == 'contact' %}active{% endif %}" id="contact">
+  <form enctype="multipart/form-data" action="{{base_url('site/saveContactData/' ~ site_info.id)}}" method="post">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="direction_input">Dirección</label>
+            <textarea class='form-control' name="address" id="direction_input" rows="5">{{contact.address}}</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="alert alert-info">
+            Para agregar mas de un telefono, puede separarlos usando una coma.
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="phone_input">Telefono</label>
+            <input class='form-control' type="text" name="phones" id="phone_input"
+            placeholder="Separe varios telefonos por comas." value='{{contact.phones}}'>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="email_input">Correo Electronico</label>
+            <input class='form-control' type="text" name="email" id="email_input" value='{{contact.email}}'>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success btn-block">Modificar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

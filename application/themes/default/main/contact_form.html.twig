@@ -1,21 +1,20 @@
 <div class='row' id="contacto">
     <div class="col-md-5 col-sm-7 col-xs-12 noPad" >
         <div id="forma-contacto" class="center-block">
-            <div id="contacto-general">
+            <div id="contacto-general" class='row'>
                 <h1 class="pabeFont text-center">Contactenos</h1>
                 <br/>
                 <div class="col-xs-12">
-                    <p><strong>Direccion </strong> Carretera Duarte Km 3 1/2, Puntezuela, Santiago.</p>
+                    <p><strong>Direccion </strong> {{contact.address}}</p>
                 </div>
                 <br/>
                 <div class="col-xs-12">
-                    <p><strong>Telefonos </strong> 809-583-0939 | 809-241-2888</p>
+                    <p><strong>Telefonos </strong> {{contact.phones}}</p>
                 </div>
                 <br/>
                 <div class="col-xs-12">
-                    <p><strong>Correo Electronico </strong> serviciocliente@pabe.com.do</p>
+                    <p><strong>Correo Electronico </strong> {{contact.email}}</p>
                 </div>
-                <hr>
             </div>
             <div id='contacto-mensaje'>
                 <h1 class="pabeFont text-center">Envienos un Mensaje</h1>

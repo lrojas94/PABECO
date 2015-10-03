@@ -6,13 +6,19 @@ class Main extends CI_Controller {
     public function index($site_id = 0){
         $this->load->model('Section_model','Section');
         $this->load->model('Homepage_model','homepage');
+        $this->load->model('Contact_model','contact');
         $data = $this->Section->get_all_with_info($site_id);
         $this->twiggy->set('sections',$data);
         $this->twiggy->set('homepage',$this->homepage->get_by('site_id',$site_id));
+        $contact_data  = $this->contact->get_by('site_id',$site_id);
+        $contact_data['phones'] = str_replace(',',' | ',$contact_data['phones']);
+        $this->twiggy->set('contact',$contact_data);
         $this->twiggy->template('main/index')->display();
     }
 
-    public function mail() {
+    public function mail($site_id = 0) {
+        $this->load->model('Contact_model','contact');
+        $contact_data = $this->contact->get_by('site_id',$site_id);
         $this->load->library('email');
 
         $config = Array(
@@ -35,7 +41,7 @@ class Main extends CI_Controller {
 
         $this->email->from($from,$name);
 
-        $this->email->to('serviciocliente@pabe.com.do');
+        $this->email->to($contact_data['email']);
         // $this->email->to('lrojas94@gmail.com');
         $this->email->subject("Feedback PABE. (Pagina Web)");
         $this->twiggy->set(array(
