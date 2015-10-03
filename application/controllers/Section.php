@@ -6,15 +6,8 @@ class Section extends MY_Controller {
 	private $messages = array();
 
 	public function index($site_id = 0){ //Lets assume pabe by default
-		$this->load->model('Section_model','sections');
-		$site_info = $this->sections->get_all_with_site_info($site_id);
-		$message = array_shift($this->messages);
-		if($message != null){
-			$this->twiggy->set('important_message',$message);
+		redirect('site/'.$site_id.'/section');
 		}
-		$this->twiggy->set('site_info',$site_info);
-		$this->twiggy->template('section/index')->display();
-	}
 
 	public function move_up($section_id){
 
@@ -67,31 +60,7 @@ class Section extends MY_Controller {
 
 	}
 
-	private function image_upload_config($filename){
-		$uploadConfig = array(
-			'overwrite' => true,
-			'upload_path' => 'assets/img/',
-			'file_name' => $filename,
-			'allowed_types'=> 'gif|jpg|png'
-		);
-		return $uploadConfig;
-	}
 
-	private function do_image_upload($inputname){
-		if(isset($_FILES[$inputname]) && $_FILES[$inputname]['error'] == 0 && $_FILES[$inputname]['name'] != ''){
-			$this->load->library('upload');
-			$filename = $_FILES[$inputname]['name'];
-			$this->upload->initialize($this->image_upload_config($filename));
-			if(!$this->upload->do_upload($inputname))
-			{
-				 return null;
-			}
-			else{
-				return 'assets/img/'.$this->upload->data()['file_name'];
-			}
-		}
-		return 'no_changes'; //Was unsuccessfull;
-	}
 
 	private function add_update_block_data($section_id){
 		$block_count =  count($this->input->post('block-title'));
@@ -136,12 +105,14 @@ class Section extends MY_Controller {
 			'section_id'=>$section_id
 		);
 
-		$filepath = $this->do_image_upload('text-image');
-		if($filepath == null){
-			return 'image_upload_error';
-		}
-		else if($filepath != 'no_changes'){
-			$data['img_url'] = $filepath;
+		if(isset($_FILES['text-image']) && $_FILES['text-image']['error'] == 0){
+			$filepath = $this->do_image_upload('text-image');
+			if($filepath == null){
+				return 'image_upload_error';
+			}
+			else if($filepath != 'no_changes'){
+				$data['img_url'] = $filepath;
+			}
 		}
 
 		if($this->input->post('text_image_id')){

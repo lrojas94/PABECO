@@ -39,6 +39,32 @@ class MY_Controller extends CI_Controller {
 
 	}
 
+  protected function image_upload_config($filename){
+		$uploadConfig = array(
+			'overwrite' => true,
+			'upload_path' => 'assets/img/',
+			'file_name' => $filename,
+			'allowed_types'=> 'gif|jpg|png'
+		);
+		return $uploadConfig;
+	}
+
+	protected function do_image_upload($inputname,$filename = null){
+		if(isset($_FILES[$inputname]) && $_FILES[$inputname]['error'] == 0 && $_FILES[$inputname]['name'] != ''){
+			$this->load->library('upload');
+			$filename = $filename == null ? $_FILES[$inputname]['name'] : $filename;
+			$this->upload->initialize($this->image_upload_config($filename));
+			if(!$this->upload->do_upload($inputname))
+			{
+				 return null;
+			}
+			else{
+				return 'assets/img/'.$this->upload->data()['file_name'];
+			}
+		}
+		return 'no_changes'; //Was unsuccessfull;
+	}
+
 
 }
 ?>

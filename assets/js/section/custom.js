@@ -67,7 +67,6 @@ function fixTextImage(){
 
 }
 
-
 function fixImages(){
   var options = {
     keepAspectRatio: true,
@@ -167,6 +166,51 @@ function readURL(input,options){
   }
 }
 
+function fixHomepageTab(){
+  var homescreen_options = {
+    fitContainer:true,
+    keepAspectRatio: true,
+  };
+  $('#homescreen_background_container img').centerImage(homescreen_options);
+  $('#homescreen_background_button').change(function(event) {
+    readURL(this,homescreen_options);
+  });
+  var logo_options = {
+    inside: true,
+    keepAspectRatio: true,
+    minFit:false,
+    keepParentPadding: true
+  };
+
+  $('#homescreen_logo_container img').centerImage(logo_options);
+
+  $('#homescreen_logo_button').change(function(event) {
+    readURL(this,logo_options);
+  });
+
+
+  $('.live-edit').click(function(){
+    var target = '#' + $(this).data('target');
+    if(!$(this).hasClass('is_editing')){
+      var text = $(target).text();
+      if($(target).hasClass('editable-text')){
+        var input = '<input type="text" class="form-control" value ="' + text + '">';
+        $(input).attr('id', $(target).attr('id'));
+        $(target).html(input);
+        $(target).parent().children('.quotation').hide();
+      }
+      $(this).text("Guardar cambios");
+      $(this).addClass('is_editing');
+    }
+    else{
+      var text = $(target).children('input').val();
+      $(target).parent().children('.quotation').show();
+      $(this).text("Modificar").removeClass('is_editing');
+      $(target).html(text);
+    }
+  });
+}
+
 $(function(){
   Dropzone.autoDiscover = false;
   $(window).load(function(){
@@ -260,8 +304,13 @@ $(function(){
 
   $('#section_image-color img').centerImage();
 
+  $('a[href="#homescreen"]').one('shown.bs.tab',function(e){
+    fixHomepageTab();
+  });
+
   fixBlocks();
   fixFullText();
   fixTextImage();
   fixImages();
+  fixHomepageTab();
 });

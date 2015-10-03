@@ -86,6 +86,19 @@
           });
         }
 
+        if(options.keepParentPadding){
+          var width = $(item).width();
+          var heigth = $(item).height();
+          var padding = parseInt($(parent).css('padding'));
+          width = width - 2*padding;
+          height = height - 2*padding;
+          $(item).css({
+            width : width,
+            height: height
+          });
+
+        }
+
         $(item).css({
             position: "absolute",
             left: Math.round($(parent).outerWidth() / 2) - Math.round($(item).outerWidth() / 2),
@@ -98,7 +111,8 @@
         fitContainer: false,
         inside:false,
         keepAspectRatio: true,
-        minFit: true
+        minFit: true,
+        keepParentPadding: false
     };
 
     $.centerImage.windowWidth = 0;

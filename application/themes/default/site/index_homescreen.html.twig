@@ -1,0 +1,39 @@
+<div role="tabpanel" class="tab-pane {% if active == 'homescreen' %}active{% endif %}" id="homescreen">
+  <form enctype="multipart/form-data" method="post" action="{{base_url('site/saveHomepageData/' ~ site_info.id)}}">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <label for="homescreen_background_button">Imagen de Fondo</label>
+          <div id="homescreen_background_container">
+            <img src="{{base_url(homepage.background)}}" alt="" />
+          </div>
+          <span class="btn btn-info btn-block btn-file">
+            Modificar Imagen de Fondo<input type="file" id ='homescreen_background_button' name="homescreen_background_image" data-target='#homescreen_background_container img'>
+          </span>
+        </div>
+        <div class="col-xs-6">
+          <label for="homescreen_logo_button">Modificar Logo</label>
+          <div id="homescreen_logo_container">
+            <img src="{{base_url(homepage.logo)}}" alt="">
+          </div>
+          <span class="btn btn-info btn-block btn-file">Modificar Logo
+            <input type="file" id="homescreen_logo_button" name="homescreen_logo_image" data-target='#homescreen_logo_container img'>
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Descripcion</label><br>
+            <input type="text" class="form-control" name="description" value='{{homepage.caption}}'></input>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class='btn btn-success btn-block' name="button">Guardar Cambios</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
