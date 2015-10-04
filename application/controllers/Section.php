@@ -142,12 +142,14 @@ class Section extends MY_Controller {
 		$this->db->order_by('position','asc');
 		$this->db->order_by('section_title','desc');
 		$sections = $this->sections->get_many_by('id_site',$site_id);
+		$prev_pos = 0;
 		for ($i=0; $i < count($sections); $i++) {
 			$pos = $i;
 			if($sections[$i]['section_title'] == ''){
-				$pos = $sections[$i-1]['position'];
+				$pos = $prev_pos;
 			}
 			$this->sections->update($sections[$i]['id'],array('position' => $pos));
+			$prev_pos = $pos;
 		}
 	}
 

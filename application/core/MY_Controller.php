@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class MY_Controller extends CI_Controller {
 
   function __construct(){
     parent::__construct();
+    require FCPATH.'application/libraries/password.php';
 
     if($this->uri->segment(1) == 'admin' && $this->uri->segment(2) == 'login'){
       return; // NO LOGIN REQUIRED.
@@ -59,7 +59,8 @@ class MY_Controller extends CI_Controller {
 				 return null;
 			}
 			else{
-				return 'assets/img/'.$this->upload->data()['file_name'];
+        $data = $this->upload->data();
+				return 'assets/img/'.$data['file_name'];
 			}
 		}
 		return 'no_changes'; //Was unsuccessfull;
